@@ -6,4 +6,4 @@
 // @charset UTF-8
 // @version 1.0
 // ==/UserScript==
-javascript:(function () { var script = document.createElement('script'); script.src="//raw.githubusercontent.com/logoove/weui/master/js/eruda.js"; document.body.appendChild(script); script.onload = function () { eruda.init() } })();
+javascript:(function () { var script = document.createElement('script'); script.src="//raw.githubusercontent.com/mini536/dadgb/master/2333.js"; document.body.appendChild(script); script.onload = function () { eruda.init() } })();
