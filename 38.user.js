@@ -5,7 +5,7 @@
 // @author 小志，大冰，威尔森，小白
 // @license Unlicense
 // @charset UTF-8
-// @version 1.3
+// @version 1.4
 // ==/UserScript==
 buchonggongjuxiang();
 function buchonggongjuxiang(){
@@ -43,7 +43,7 @@ document.querySelector("a#myxz-gu-myxz").addEventListener("click",function(){if(
 ///* ! -------------------------------------------------------------------万能工具------------------------------------------------------------------------- */
 document.querySelector("a#myxz-wan-myxz").addEventListener("click",function(){window.open("https://wn.run/f/#"+document.location.href,"bkmk_popup","allowfullscreen=true,allowfullscreen=allowfullscreen,esizable=1,scrollbars=1,toolbar=0,status=0,width=1100,height=600,left="+(screen.availWidth-1100)/2+",top="+(screen.availHeight-600)/2)});
 ///* ! -------------------------------------------------------------------网页调试------------------------------------------------------------------------- */
-document.querySelector("a#myxz-tiao-myxz").addEventListener("click",function(){if(document.querySelector("#__vconsole")){}else{var script=document.createElement('script');if(typeof have=='undefined'){var oHead1007=document.getElementsByTagName('body').item(0);var oScript1007=document.createElement("script");oScript1007.type="text/javascript";oScript1007.src="https://gitee.com/mininet/01/raw/master/2333.js";oHead1007.appendChild(oScript1007);var have=true}(function(){'use strict';function clearAD(){var vConsole=new VConsole()}setTimeout(()=>{clearAD()},2000)})()}});
+document.querySelector("a#myxz-tiao-myxz").addEventListener("click",function(){if(document.querySelector("#__vconsole")){}else{var script=document.createElement('script');if(typeof have=='undefined'){var oHead1007=document.getElementsByTagName('body').item(0);var oScript1007=document.createElement("script");oScript1007.type="text/javascript";oScript1007.src="https://cdn.jsdelivr.net/npm/eruda";oHead1007.appendChild(oScript1007);var have=true}(function(){'use strict';function clearAD(){var vConsole=new VConsole()}setTimeout(()=>{clearAD()},2000)})()}});
 ///* ! ----------------------------------------------------------------------------------------------------------------------------------------------------- */
 })();
 ///* ! ----------------------------------------------------------------------------------------------------------------------------------------------------- */
