@@ -2,7 +2,7 @@
 // @name 补充工具
 // @description 恢复原来几个功能 ：01：谷歌翻译功能，02：万能工具，03：网页调试
 // @match *://*/*
-// @author 蚂蚁小志
+// @author 小志，大冰，威尔森，小白
 // @license Unlicense
 // @charset UTF-8
 // @version 1.3
@@ -20,7 +20,7 @@ if(self!=top){}else{
 ///* ! ----------------------------------------------------------------------------------------------------------------------------------------------------- */
 (function(){
 var div = document.createElement("div");
-div.innerHTML = '<div class="myxz"><ul><li><a class="hide">蚂蚁小志</a><ul>' +
+div.innerHTML = '<div class="myxz"><ul><li><a class="hide">工具箱</a><ul>' +
 '<li><a id="myxz-gu-myxz" type="button" style="color:black!important;">翻译</a></li>' +
 '<li><a id="myxz-wan-myxz" type="button" style="color:black!important;">万能</a></li>' +
 '<li><a id="myxz-tiao-myxz" type="button" style="color:black!important;">调试</a></li>' +
@@ -43,7 +43,7 @@ document.querySelector("a#myxz-gu-myxz").addEventListener("click",function(){if(
 ///* ! -------------------------------------------------------------------万能工具------------------------------------------------------------------------- */
 document.querySelector("a#myxz-wan-myxz").addEventListener("click",function(){window.open("https://wn.run/f/#"+document.location.href,"bkmk_popup","allowfullscreen=true,allowfullscreen=allowfullscreen,esizable=1,scrollbars=1,toolbar=0,status=0,width=1100,height=600,left="+(screen.availWidth-1100)/2+",top="+(screen.availHeight-600)/2)});
 ///* ! -------------------------------------------------------------------网页调试------------------------------------------------------------------------- */
-document.querySelector("a#myxz-tiao-myxz").addEventListener("click",function(){if(document.querySelector("#__vconsole")){}else{var script=document.createElement('script');if(typeof have=='undefined'){var oHead1007=document.getElementsByTagName('body').item(0);var oScript1007=document.createElement("script");oScript1007.type="text/javascript";oScript1007.src="https://gitee.com/mininet/01/raw/master/438.js";oHead1007.appendChild(oScript1007);var have=true}(function(){'use strict';function clearAD(){var vConsole=new VConsole()}setTimeout(()=>{clearAD()},2000)})()}});
+document.querySelector("a#myxz-tiao-myxz").addEventListener("click",function(){if(document.querySelector("#__vconsole")){}else{var script=document.createElement('script');if(typeof have=='undefined'){var oHead1007=document.getElementsByTagName('body').item(0);var oScript1007=document.createElement("script");oScript1007.type="text/javascript";oScript1007.src="https://gitee.com/mininet/01/raw/master/2333.js";oHead1007.appendChild(oScript1007);var have=true}(function(){'use strict';function clearAD(){var vConsole=new VConsole()}setTimeout(()=>{clearAD()},2000)})()}});
 ///* ! ----------------------------------------------------------------------------------------------------------------------------------------------------- */
 })();
 ///* ! ----------------------------------------------------------------------------------------------------------------------------------------------------- */
