@@ -1,0 +1,1 @@
+javascript:void((function(){window.open("http://api.qrserver.com/v1/create-qr-code/?data="+document.location.href,"bkmk_popup","allowfullscreen=true,allowfullscreen=allowfullscreen,esizable=1,scrollbars=1,toolbar=0,status=0,width=300,height=300,left="+(screen.availWidth-300)/2+",top="+(screen.availHeight-300)/2);})())

@@ -1,0 +1,1 @@
+javascript:void((function(){window.open("https://wn.run/short_url/url.php?url="+document.location.href,"bkmk_popup","allowfullscreen=true,allowfullscreen=allowfullscreen,esizable=1,scrollbars=1,toolbar=0,status=0,width=345,height=10,left="+(screen.availWidth-345)/2+",top="+(screen.availHeight-10)/2);})())
