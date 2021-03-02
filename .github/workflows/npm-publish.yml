@@ -9,7 +9,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/setup-python@v2
       with:
@@ -24,4 +23,4 @@ jobs:
         java -jar apktool_2.5.0.jar d resp32m -o v7a
         java -jar apktool_2.5.0.jar d resp64m -o v8a
         
-       ls-h
+       ls -h
