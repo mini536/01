@@ -22,4 +22,34 @@ jobs:
         
         java -jar apktool_2.5.0.jar d resp32m -o v7a
         java -jar apktool_2.5.0.jar d resp64m -o v8a
-        ls -h
+        sed -i 's/"geckoViewAddons"/"unknown"/' ./v7a/smali/mozilla/components/feature/addons/AddonManager.smali
+        sed -i 's/"nativeMessaging"/"unknown"/' ./v7a/smali/mozilla/components/feature/addons/AddonManager.smali
+        sed -i 's/android\/downloads/firefox\/downloads/' ./v7a/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
+        sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' ./v7a/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
+        sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' ./v7a/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
+        sed -i 's/browser.safebrowsing.phishing.enabled/unknown/' v8a/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
+        sed -i '/.line 9/i\const-string v2, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons\.json?t="\
+        sed -i 's/browser.safebrowsing.malware.enabled/unknown/;s/browser.safebrowsing.phishing.enabled/unknown/' v8a/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
+        sed -i 's/"geckoViewAddons"/"unknown"/' v8a/smali/mozilla/components/feature/addons/AddonManager.smali
+        sed -i 's/"nativeMessaging"/"unknown"/' v8a/smali/mozilla/components/feature/addons/AddonManager.smali
+        sed -i 's/android\/downloads/firefox\/downloads/' v8a/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
+        sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v7a/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
+        sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' v8a/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
+        sed -i 's/browser.safebrowsing.phishing.enabled/unknown/' v8a/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
+        sed -i '/.line 9/i\const-string v2, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons\.json?t="\
+            
+        java -jar apktool_2.5.0.jar b v7a -o v7a.apk --use-aapt2
+        java -jar apktool_2.5.0.jar b v8a -o v8a.apk --use-aapt2
+        
+        wget -q https://github.com/lindongbin/gt/raw/master/zipalign
+        wget -q -P ./lib64 https://github.com/lindongbin/gt/raw/master/libc%2B%2B.so
+        chmod +x zipalign
+        ./zipalign -p 4 v7a.apk v7a-align.apk
+        ./zipalign -p 4 v8a.apk v8a-align.apk
+        
+        wget -q https://github.com/lindongbin/gt/raw/master/apksigner.jar
+        wget -q https://github.com/lindongbin/gt/raw/master/apksigner.jks
+        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out resp32mm v7a-align.apk
+        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out resp64mm v8a-align.apk
+        EOF
+
