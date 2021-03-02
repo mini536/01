@@ -1,4 +1,4 @@
-name: auto-push-firefox
+name: test3
 
 on:
   workflow_dispatch:
