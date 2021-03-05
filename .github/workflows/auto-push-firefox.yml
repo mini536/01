@@ -35,7 +35,7 @@ jobs:
         chmod +x zipalign
         ./zipalign -p 4 v8a.apk v8a-align.apk
 
-name: Update the CI tag
+        name: Update the CI tag
         uses: Xotl/cool-github-releases@v1
         with:
           mode: update
