@@ -41,5 +41,5 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: "fxn"
-        path: v8a-align.apk  
+        path: v8a-align.apk
 
