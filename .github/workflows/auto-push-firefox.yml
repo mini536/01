@@ -38,19 +38,19 @@ jobs:
         wget -q https://github.com/lindongbin/gt/raw/master/apksigner.jks
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out resp64mm v8a-align.apk
 
- - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v2
         with:
           name: v8a-align.apk
           path: ./
 
-      - name: Zip Artifacts
+    - name: Zip Artifacts
         uses: papeloto/action-zip@v1
         with:
           files: v8a-align.apk
           dest: ./
         if: github.ref == 'refs/heads/master'
 
-      - name: Update the CI tag
+    - name: Update the CI tag
         uses: Xotl/cool-github-releases@v1
         with:
           mode: update
