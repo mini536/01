@@ -42,4 +42,4 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
           name: v8a-align.apk
-          path: ./
+          path: ./bin/
