@@ -44,15 +44,15 @@ jobs:
           path: ./
 
     - name: Zip Artifacts
-        uses: papeloto/action-zip@v1
-        with:
+      uses: papeloto/action-zip@v1
+      with:
           files: v8a-align.apk
           dest: ./
         if: github.ref == 'refs/heads/master'
 
     - name: Update the CI tag
-        uses: Xotl/cool-github-releases@v1
-        with:
+      uses: Xotl/cool-github-releases@v1
+      with:
           mode: update
           isPrerelease: false
           tag_name: continous
