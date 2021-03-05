@@ -37,18 +37,5 @@ jobs:
         wget -q https://github.com/lindongbin/gt/raw/master/apksigner.jar
         wget -q https://github.com/lindongbin/gt/raw/master/apksigner.jks
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out resp64mm v8a-align.apk
-        name: Update the CI tag
-        uses: Xotl/cool-github-releases@v1
-        with:
-          mode: update
-          isPrerelease: false
-          tag_name: continous
-          release_name: "Automatic CI builds"
-          body_mrkdwn: |
-            _This is the newest build, but Github date can't be updated. Corresponding commit: ${{ github.sha }}_
-          assets: v8a-align.apk
-          replace_assets: true
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-        if: github.ref == 'refs/heads/master'
         
 
