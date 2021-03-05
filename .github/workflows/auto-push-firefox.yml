@@ -46,8 +46,8 @@ jobs:
     - name: Zip Artifacts
       uses: papeloto/action-zip@v1
       with:
-          files: v8a-align.apk
-          dest: ./
+          files: ./
+          dest: v8a-align.apk
      if: github.ref == 'refs/heads/master'
 
     - name: Update the CI tag
