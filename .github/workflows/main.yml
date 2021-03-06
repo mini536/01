@@ -18,11 +18,10 @@ jobs:
       run: |
         wget -q -O "resp32m" https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/mobile.v2.fenix.nightly.latest.arm64-v8a/artifacts/public/build/armeabi-v7a/target.apk
         wget -q -O "resp32p" https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/mobile.v2.fenix.nightly.latest.arm64-v8a/artifacts/public/build/x86/target.apk
-        wget -q -O "resp64p https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/mobile.v2.fenix.nightly.latest.arm64-v8a/artifacts/public/build/x86_64/target.apk
+        wget -q -O "resp64p" https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/mobile.v2.fenix.nightly.latest.arm64-v8a/artifacts/public/build/x86_64/target.apk
         wget -q -O "resp64m" https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/mobile.v2.fenix.nightly.latest.arm64-v8a/artifacts/public/build/arm64-v8a/target.apk
 
         wget -q https://github.com/iBotPeaches/Apktool/releases/download/v2.5.0/apktool_2.5.0.jar
-	
 	java -jar apktool_2.5.0.jar d resp64m -o v8m
 	java -jar apktool_2.5.0.jar d resp32m -o v7m
         java -jar apktool_2.5.0.jar d resp32p -o v7p
