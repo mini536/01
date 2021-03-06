@@ -22,9 +22,8 @@ jobs:
         wget -q -O "resp64m" https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/mobile.v2.fenix.nightly.latest.arm64-v8a/artifacts/public/build/arm64-v8a/target.apk
 
         wget -q https://github.com/iBotPeaches/Apktool/releases/download/v2.5.0/apktool_2.5.0.jar
-		
-        java -jar apktool_2.5.0.jar d resp64m -o v8m
-        java -jar apktool_2.5.0.jar d resp32m -o v7m
+	java -jar apktool_2.5.0.jar d resp64m -o v8m
+	java -jar apktool_2.5.0.jar d resp32m -o v7m
         java -jar apktool_2.5.0.jar d resp32p -o v7p
         java -jar apktool_2.5.0.jar d resp64p -o v8p
         
@@ -33,7 +32,7 @@ jobs:
         sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v8m/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
         sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v8m/smali/mozilla/components/feature/addons/AddonManager.smali
         sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons.json"' v8m/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
-		
+	
         sed -i 's/browser.safebrowsing.malware.enabled/unknown/;s/browser.safebrowsing.phishing.enabled/unknown/' v8p/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
         sed -i 's/android\/downloads/firefox\/downloads/' v8p/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
         sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v8p/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
@@ -45,14 +44,13 @@ jobs:
         sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v7m/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
         sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v7m/smali/mozilla/components/feature/addons/AddonManager.smali
         sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons.json"' v7m/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
-		
+	
         sed -i 's/browser.safebrowsing.malware.enabled/unknown/;s/browser.safebrowsing.phishing.enabled/unknown/' v7p/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
         sed -i 's/android\/downloads/firefox\/downloads/' v7p/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
         sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v7p/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
         sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v7p/smali/mozilla/components/feature/addons/AddonManager.smali
         sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons.json"' v7p/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
-		
-		
+	
         java -jar apktool_2.5.0.jar b v8m -o v8m.apk --use-aapt2
         java -jar apktool_2.5.0.jar b v8p -o v8p.apk --use-aapt2
         java -jar apktool_2.5.0.jar b v7m -o v7m.apk --use-aapt2
@@ -73,7 +71,7 @@ jobs:
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxn-m-a7.apk v8pp.apk
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxn-m-64.apk v7mm.apk
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxn-m-32.apk v7pp.apk
-		
+	
         mkdir bin
         mv fxn-m-a8.apk fxn-m-a7.apk fxn-m-64.apk fxn-m-32.apk ./bin/
 	
