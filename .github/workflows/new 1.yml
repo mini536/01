@@ -3,7 +3,7 @@ name: auto-push-firefox
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 5,17 * * "
+    - cron: "0 5,17 * * *"
 
 jobs:
   build:
