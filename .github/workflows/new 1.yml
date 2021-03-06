@@ -1,4 +1,4 @@
-name: auto-push-firefox
+name: auto-mod-fxn-all
 
 on:
   workflow_dispatch:
@@ -71,5 +71,5 @@ jobs:
         mv fxn-m-7a.apk fxn-m-7p.apk fxn-m-8a.apk fxn-m-8p.apk ./bin/
     - uses: actions/upload-artifact@v2
       with:
-          name: fxn-m-7a.apk fxn-m-7p.apk fxn-m-8a.apk fxn-m-8p.apk
+          name: fxn-m-all
           path: ./bin/
