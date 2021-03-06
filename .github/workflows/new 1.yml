@@ -3,7 +3,7 @@ name: auto-push-firefox
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 1,13 * * *"
+    - cron: "0 */2 * * 1-5"
 
 jobs:
   build:
@@ -15,36 +15,26 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Download FXN
+    - name: Download and mod fenix
       run: |
+        cat > firefox.sh << EOF
+        wget -q -O "resp32m" https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/mobile.v2.fenix.nightly.latest.arm64-v8a/artifacts/public/build/armeabi-v7a/target.apk
         wget -q -O "resp64m" https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/mobile.v2.fenix.nightly.latest.arm64-v8a/artifacts/public/build/arm64-v8a/target.apk
-        wget -q -O "resp32p" https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/mobile.v2.fenix.nightly.latest.arm64-v8a/artifacts/public/build/x86/target.apk
-        wget -q -O "resp64p"  https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/mobile.v2.fenix.nightly.latest.arm64-v8a/artifacts/public/build/x86_64/target.apk
         wget -q https://github.com/iBotPeaches/Apktool/releases/download/v2.5.0/apktool_2.5.0.jar
-	
-	java -jar apktool_2.5.0.jar d resp64m -o v8a
-	
+        
+        wget -q -O "resp64p" https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/mobile.v2.fenix.nightly.latest.arm64-v8a/artifacts/public/build/x86_64/target.apk
+        wget -q -O "resp32p" https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/mobile.v2.fenix.nightly.latest.arm64-v8a/artifacts/public/build/x86/target.apk
+        
+        java -jar apktool_2.5.0.jar d resp32m -o v7a
+        java -jar apktool_2.5.0.jar d resp64m -o v8a
+        java -jar apktool_2.5.0.jar d resp32p -o v7p
+        java -jar apktool_2.5.0.jar d resp64p -o v8p
+        
         sed -i 's/browser.safebrowsing.malware.enabled/unknown/;s/browser.safebrowsing.phishing.enabled/unknown/' v8a/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
         sed -i 's/android\/downloads/firefox\/downloads/' v8a/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
         sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v8a/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
-        sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v8a/smali/mozilla/components/feature/addons/AddonManager.smali
-        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons.json"' v8a/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
- 
-        java -jar apktool_2.5.0.jar b v8a -o v8a.apk --use-aapt2
-        
-        wget -q https://github.com/lindongbin/gt/raw/master/zipalign
-        wget -q -P ./lib64 https://github.com/lindongbin/gt/raw/master/libc%2B%2B.so
-        chmod +x zipalign
-        ./zipalign -p 4 v8a.apk v8.apk
-        
-        wget -q https://github.com/lindongbin/gt/raw/master/apksigner.jar
-        wget -q https://github.com/lindongbin/gt/raw/master/apksigner.jks
-        
-        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxn.apk v8.apk
-
-        mkdir bin
-        mv fxn.apk ./bin/
-    - uses: actions/upload-artifact@v2
-      with:
-          name: fxn.apk
-          path: ./bin/
+	sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v8a/smali/mozilla/components/feature/addons/AddonManager.smali
+        sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/;/invoke-virtual {p0, p1, p2, p3}/i\    const\/4 p2, 0x1' v7a/smali/mozilla/components/feature/addons/AddonManager.smali
+        sed -i 's/android\/downloads/firefox\/downloads/' v7a/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
+        sed -i 's/if-eqz p1, :cond_a/goto :cond_a/' v7a/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
+        sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' v7a/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
