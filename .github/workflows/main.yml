@@ -3,7 +3,7 @@ name: auto-mod-fxn-v8
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 1,13 * * *"
+    - cron: "0 6,18 * * *"
 
 jobs:
   build:
