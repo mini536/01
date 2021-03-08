@@ -71,5 +71,18 @@ jobs:
         mv fxn-m-7a.apk fxn-m-7p.apk fxn-m-8a.apk fxn-m-8p.apk ./bin/
     - uses: actions/upload-artifact@v2
       with:
-          name: fxn-m-all
-          path: ./bin/
+          name: fxn-m-v7a
+          path: ./bin/fxn-m-v7a.apk
+    - uses: actions/upload-artifact@v2
+      with:
+          name: fxn-m-v8a
+          path: ./bin/fxn-m-v8a.apk
+    - uses: actions/upload-artifact@v2
+      with:
+          name: fxn-m-v7p
+          path: ./bin/fxn-m-v7p.apk
+    - uses: actions/upload-artifact@v2
+      with:
+          name: fxn-m-v8p
+          path: ./bin/fxn-m-v8p.apk
+
