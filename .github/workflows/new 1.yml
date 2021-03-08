@@ -67,22 +67,28 @@ jobs:
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxn-m-8a.apk v8a-align.apk
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxn-m-7p.apk v7p-align.apk
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxn-m-8p.apk v8p-align.apk
-        mkdir bin
-        mv fxn-m-7a.apk fxn-m-7p.apk fxn-m-8a.apk fxn-m-8p.apk ./bin/
+        mkdir arm
+        mkdir arm64
+        mkdir x86
+        mkdir x64
+        mv fxn-m-7a.apk ./arm/
+        mv fxn-m-8a.apk ./arm64/
+        mv fxn-m-7p.apk ./x86/
+        mv fxn-m-8p.apk ./x64/
     - uses: actions/upload-artifact@v2
       with:
           name: fxn-m-v7a
-          path: ./bin/fxn-m-v7a.apk
+          path: ./arm/
     - uses: actions/upload-artifact@v2
       with:
           name: fxn-m-v8a
-          path: ./bin/fxn-m-v8a.apk
+          path: ./arm64/
     - uses: actions/upload-artifact@v2
       with:
-          name: fxn-m-v7p
-          path: ./bin/fxn-m-v7p.apk
+          name: fxn-m-x86
+          path: ./x86/
     - uses: actions/upload-artifact@v2
       with:
-          name: fxn-m-v8p
-          path: ./bin/fxn-m-v8p.apk
+          name: fxn-m-x64
+          path: ./x64/
 
