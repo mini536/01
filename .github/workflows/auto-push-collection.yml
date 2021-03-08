@@ -85,7 +85,7 @@ jobs:
     - name: Commit files
       run: |
         git config user.name Rosabis
-        git config user.email mini67@live.cn
+        git config user.email kolibrios@zoho.com
         git checkout --orphan addons
         git rm -rf .
         git add "addons.json"
