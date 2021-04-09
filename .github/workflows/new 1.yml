@@ -34,6 +34,7 @@ jobs:
         sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v8a/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
         sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v8a/smali/mozilla/components/feature/addons/AddonManager.smali
         sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons.json"' v8a/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
+        sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' v8a/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
         sed -i 's/browser.safebrowsing.malware.enabled/unknown/;s/browser.safebrowsing.phishing.enabled/unknown/' v7a/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
         sed -i 's/android\/downloads/firefox\/downloads/' v7a/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
         sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v7a/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
@@ -44,12 +45,14 @@ jobs:
         sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v8p/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
         sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v8p/smali/mozilla/components/feature/addons/AddonManager.smali
         sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons.json"' v8p/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
+        sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' v8p/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
         sed -i 's/browser.safebrowsing.malware.enabled/unknown/;s/browser.safebrowsing.phishing.enabled/unknown/' v7p/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
         sed -i 's/android\/downloads/firefox\/downloads/' v7p/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
         sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v7p/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
         sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' v8a/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
         sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v7p/smali/mozilla/components/feature/addons/AddonManager.smali
         sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons.json"' v7p/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
+        sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' v7p/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
         java -jar apktool_2.5.0.jar b v7a -o v7a.apk --use-aapt2
         java -jar apktool_2.5.0.jar b v8a -o v8a.apk --use-aapt2
         java -jar apktool_2.5.0.jar b v7p -o v7p.apk --use-aapt2
