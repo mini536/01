@@ -40,20 +40,15 @@ jobs:
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxn-m-8a.apk v8a-align.apk
         mkdir arm64
         mv fxn-m-8a.apk ./arm64/
-    - name: Generate release tag
-      id: tag
-      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
-      run: |
-        echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
-        touch release.txt
-        echo "#  hello world!" > release.txt
-        echo "::set-output name=status::success"
+    - name: Get current date
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d')" 
     - name: Upload nightly release
       uses: svenstaro/upload-release-action@v2
       with:           
         repo_token: ${{ secrets.ACTION_TOKEN }}
         file: ./arm64/fxn-m-8a.apk
-        tag: ${{ steps.tag.outputs.release_tag }}           
+        tag: ${{ steps.date.outputs.date }}           
         body: "Nightly build"           
         file_glob: true           
         prerelease: true           
