@@ -1,43 +1,56 @@
-name: auto-push-collection
+name: auto-mod-fxn-v8
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0,12 * * *"
+    - cron: "18 21,9  *  *  *"
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
       with:
         python-version: '3.x'
 
-    - name: Install dependencies
+    - name: Download and mod fenix
       run: |
-        pip install aiohttp
-
-    - name: Create python file
-      run: |
-        cat > addons.py << EOF
-        import asyncio, aiohttp, json
-        async def getaddons(url):
-            async with aiohttp.ClientSession() as session:
-                async with session.get(url=url) as req:
-                    resp = await req.json()
-                page_count = resp["page_count"]
-                addons = []
-                for i in range(len(resp["results"])):
-                    addon = {}
-                    data = resp["results"][i]
-                    for ii in range(len(data["authors"])):
-                        data["authors"][ii]["id"] = ""
-                        data["authors"][ii]["url"] = ""
-                        data["authors"][ii]["username"] = ""
-                    addon["authors"] = data["authors"]
-                    addon["current_version"] = {
-                        "files": [{
-                            "id": data["current_version"]["files"][0]["id"],
-                            "
+        wget -q -O "resp64m" https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/mobile.v2.fenix.nightly.latest.arm64-v8a/artifacts/public/build/arm64-v8a/target.apk
+        wget -q https://github.com/iBotPeaches/Apktool/releases/download/v2.5.0/apktool_2.5.0.jar
+        
+        
+        java -jar apktool_2.5.0.jar d resp64m -o v8a
+        
+        sed -i 's/browser.safebrowsing.malware.enabled/unknown/;s/browser.safebrowsing.phishing.enabled/unknown/' v8a/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
+        sed -i 's/android\/downloads/firefox\/downloads/' v8a/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
+        sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v8a/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
+        sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v8a/smali/mozilla/components/feature/addons/AddonManager.smali
+        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons.json"' v8a/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
+        sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' v8a/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
+        java -jar apktool_2.5.0.jar b v8a -o v8a.apk --use-aapt2
+        wget -q https://github.com/lindongbin/gt/raw/master/zipalign
+        wget -q -P ./lib64 https://github.com/lindongbin/gt/raw/master/libc%2B%2B.so
+        chmod +x zipalign
+        ./zipalign -p 4 v8a.apk v8a-align.apk
+        
+        wget -q https://github.com/lindongbin/gt/raw/master/apksigner.jar
+        wget -q https://github.com/lindongbin/gt/raw/master/apksigner.jks
+        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxn-m-8a.apk v8a-align.apk
+        mkdir arm64
+        mv fxn-m-8a.apk ./arm64/
+    - name: Upload nightly release
+      uses: svenstaro/upload-release-action@v2
+      with:           
+        repo_token: ${{ secrets.ACTION_TOKEN }}
+        file: ./arm64/fxn-m-8a.apk
+        tag: ${{ github.ref }}           
+        body: "Nightly build"           
+        file_glob: true           
+        prerelease: true           
+        overwrite: true
+    - uses: actions/upload-artifact@v2
+      with:
+          name: fxn-m-v8a
+          path: ./arm64/
