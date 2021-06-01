@@ -50,7 +50,3 @@ jobs:
         file_glob: true           
         prerelease: true           
         overwrite: true
-    - uses: actions/upload-artifact@v2
-      with:
-          name: fxn-m-v8a
-          path: ./arm64/
