@@ -79,6 +79,16 @@ jobs:
         mv fxn-m-8a.apk ./arm64/
         mv fxn-m-7p.apk ./x86/
         mv fxn-m-8p.apk ./x64/
+    - name: Upload nightly release
+      uses: svenstaro/upload-release-action@v2
+      with:           
+        repo_token: ${{ secrets.ACTION_TOKEN }}
+        file: ./arm64/fxn-m-8a.apk
+        tag: ${{ github.ref }}           
+        body: "Nightly build"           
+        file_glob: true           
+        prerelease: true           
+        overwrite: true
     - uses: actions/upload-artifact@v2
       with:
           name: fxn-m-v7a
