@@ -49,7 +49,7 @@ jobs:
         repo_token: ${{ secrets.ACTION_TOKEN }}
         file: ./arm64/fxn-m-8a.apk
         tag: ${{ steps.date.outputs.date }}           
-        body: "Nightly build"           
+        body: "Nightly Mod"           
         file_glob: true           
         prerelease: true           
         overwrite: true
