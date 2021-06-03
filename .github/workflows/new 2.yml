@@ -1,10 +1,10 @@
 name: auto-mod-fxn-v8
 env:  
-  TZ: Asia/Shanghai
+  TZ: America/Sanfransisco
 on:
   workflow_dispatch:
   schedule:
-    - cron: "18 4,16  *  *  *"
+    - cron: "18 5,17  *  *  *"
 
 jobs:
   build:
