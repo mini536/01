@@ -25,7 +25,7 @@ jobs:
         java -jar apktool_2.5.0.jar d resp64m -o v8a
         
         sed -i 's/browser.safebrowsing.malware.enabled/unknown/;s/browser.safebrowsing.phishing.enabled/unknown/' v8a/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
-        sed -i 's/android\/downloads/firefox\/downloads/' v8a/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
+        sed -i 's/android\/downloads/firefox\/downloads/' v8a/smali/org/mozilla/fenix/AppRequestInterceptor.smali
         sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v8a/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
         sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v8a/smali/mozilla/components/feature/addons/AddonManager.smali
         sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons.json"' v8a/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
