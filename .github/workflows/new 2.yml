@@ -1,5 +1,6 @@
 name: auto-mod-fxn-v8
-
+env:    
+  TZ: America/Sanfransisco  
 on:
   workflow_dispatch:
   schedule:
