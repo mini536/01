@@ -40,8 +40,8 @@ jobs:
         wget -q https://github.com/lindongbin/gt/raw/master/apksigner.jks
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxn-m-8a.apk v8a-align.apk
         mkdir arm64
-        mv fxn-m-8a.apk ./arm64/
-        mv fxn-m-8a.apk $(date +"%Y-%m-%d").apk
+        mv fxn-m-8a.apk $(date +"%Y-%m-%d").apk  
+        mv $(date +"%Y-%m-%d").apk ./arm64/
     - name: Get current date
       id: date
       run: echo "::set-output name=date::$(date +%Y年%m月%d日%H时)"
