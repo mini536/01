@@ -18,7 +18,7 @@ jobs:
 
     - name: Download and mod fenix
       run: |
-        wget -q -O "resp64m" https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/mobile.v2.fenix.release.latest.armeabi-v7a/artifacts/public%2Fbuild%2Farmeabi-v7a%2Ftarget.apk
+        wget -q -O "resp64m" https://download-ssl.firefox.com.cn/releases/mobile/90.1/zh-CN/Firefox-Android-90.1.apk
         wget -q https://github.com/iBotPeaches/Apktool/releases/download/v2.5.0/apktool_2.5.0.jar
         
         
@@ -50,7 +50,7 @@ jobs:
         repo_token: ${{ secrets.ACTION_TOKEN }}
         file: ./arm64/fx-m-7a.apk
         tag: ${{ steps.date.outputs.date }}           
-        body: "Nightly Mod"           
+        body: "Chinese Version"           
         file_glob: true           
         prerelease: false           
         overwrite: true
