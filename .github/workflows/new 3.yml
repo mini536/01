@@ -38,9 +38,9 @@ jobs:
         
         wget -q https://github.com/lindongbin/gt/raw/master/apksigner.jar
         wget -q https://github.com/lindongbin/gt/raw/master/apksigner.jks
-        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fx-m-7a.apk v8a-align.apk
+        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxc-m-7a.apk v8a-align.apk
         mkdir arm64
-        mv fx-m-7a.apk ./arm64/
+        mv fxc-m-7a.apk ./arm64/
     - name: Get current date
       id: date
       run: echo "::set-output name=date::$(date +%Y年%m月%d日%H时)"
@@ -48,7 +48,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:           
         repo_token: ${{ secrets.ACTION_TOKEN }}
-        file: ./arm64/fx-m-7a.apk
+        file: ./arm64/fxc-m-7a.apk
         tag: ${{ steps.date.outputs.date }}           
         body: "Chinese Version"           
         file_glob: true           
