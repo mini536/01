@@ -33,40 +33,40 @@ jobs:
         sed -i 's/android\/downloads/firefox\/downloads/' v8a/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
         sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v8a/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
         sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v8a/smali/mozilla/components/feature/addons/AddonManager.smali
-        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons.json"' v8a/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
+        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/Rosabis\/01@addons\/addons.json"' v8a/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
         sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' v8a/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
         sed -i 's/browser.safebrowsing.malware.enabled/unknown/;s/browser.safebrowsing.phishing.enabled/unknown/' v7a/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
         sed -i 's/android\/downloads/firefox\/downloads/' v7a/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
         sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v7a/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
         sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v7a/smali/mozilla/components/feature/addons/AddonManager.smali
-        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons.json"' v7a/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
+        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/Rosabis\/01@addons\/addons.json"' v7a/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
         sed -i 's/browser.safebrowsing.malware.enabled/unknown/;s/browser.safebrowsing.phishing.enabled/unknown/' v8p/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
         sed -i 's/android\/downloads/firefox\/downloads/' v8p/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
         sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v8p/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
         sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v8p/smali/mozilla/components/feature/addons/AddonManager.smali
-        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons.json"' v8p/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
+        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/Rosabis\/01@addons\/addons.json"' v8p/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
         sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' v8p/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
         sed -i 's/browser.safebrowsing.malware.enabled/unknown/;s/browser.safebrowsing.phishing.enabled/unknown/' v7p/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
         sed -i 's/android\/downloads/firefox\/downloads/' v7p/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
         sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v7p/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
         sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' v8a/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
         sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v7p/smali/mozilla/components/feature/addons/AddonManager.smali
-        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons.json"' v7p/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
+        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/Rosabis\/01@addons\/addons.json"' v7p/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
         sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' v7p/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
         java -jar apktool_2.5.0.jar b v7a -o v7a.apk --use-aapt2
         java -jar apktool_2.5.0.jar b v8a -o v8a.apk --use-aapt2
         java -jar apktool_2.5.0.jar b v7p -o v7p.apk --use-aapt2
         java -jar apktool_2.5.0.jar b v8p -o v8p.apk --use-aapt2
-        wget -q https://github.com/lindongbin/gt/raw/master/zipalign
-        wget -q -P ./lib64 https://github.com/lindongbin/gt/raw/master/libc%2B%2B.so
+        wget -q https://github.com/Rosabis/01/raw/master/zipalign
+        wget -q -P ./lib64 https://github.com/Rosabis/01/raw/master/libc%2B%2B.so
         chmod +x zipalign
         ./zipalign -p 4 v7a.apk v7a-align.apk
         ./zipalign -p 4 v8a.apk v8a-align.apk
         ./zipalign -p 4 v7p.apk v7p-align.apk
         ./zipalign -p 4 v8p.apk v8p-align.apk
         
-        wget -q https://github.com/lindongbin/gt/raw/master/apksigner.jar
-        wget -q https://github.com/lindongbin/gt/raw/master/apksigner.jks
+        wget -q https://github.com/Rosabis/01/raw/master/apksigner.jar
+        wget -q https://github.com/Rosabis/01/raw/master/apksigner.jks
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxn-m-7a.apk v7a-align.apk
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxn-m-8a.apk v8a-align.apk
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxn-m-7p.apk v7p-align.apk

@@ -3,7 +3,7 @@ name: auto-push-collection
 on:
   workflow_dispatch:
   schedule:
-    - cron: "30 22 */2 * *"
+    - cron: "18 0,12  *  *  *"
 
 jobs:
   build:
