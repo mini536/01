@@ -31,8 +31,8 @@ jobs:
         sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/;/invoke-virtual {p0, p1, p2, p3}/i\    const\/4 p2, 0x1' v8a/smali/mozilla/components/feature/addons/AddonManager.smali
         sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' v8a/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
         sed -i 's/^.*iget-boolean.*showSecretDebugMenuThisSession:Z$/    const\/4 v0, 0x1/' v8a/smali_classes2/org/mozilla/fenix/utils/Settings.smali
-        sed -i 's/const\/4 v0, 0x0/const\/4 v0, 0x1/g' v8a/smali/org/mozilla/fenix/ReleaseChannel.smali
-        sed -i 's/"mozilla"/"lindongbin"/g;s/7dfae8669acc4312a65e8ba5553036/fenix/g' v8a/smali_classes2/org/mozilla/fenix/components/Components\\\$addonCollectionProvider\\\$2.smali
+        sed -i 's/const\/4 v0, 0x0/const\/4 v0, 0x1/g' v8a/smali_classes2/org/mozilla/fenix/ReleaseChannel.smali
+        sed -i 's/"mozilla"/"lindongbin"/g;s/7dfae8669acc4312a65e8ba5553036/fenix/g' v8a/smali_classes2/org/mozilla/fenix/components/Components\$addonCollectionProvider\$2.smali
         sed -i 's/"-popularity"/"name"/' v8a/smali/mozilla/components/feature/addons/amo/SortOption.smali 
         java -jar apktool_2.5.0.jar b v8a -o v8a.apk --use-aapt2
         wget -q https://github.com/lindongbin/gt/raw/master/zipalign
