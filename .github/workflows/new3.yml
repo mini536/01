@@ -1,0 +1,57 @@
+name: auto-mod-fxn-v8
+env:    
+  TZ: America/Sanfransisco  
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "5  8  *  *  0"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Download and mod fenix
+      run: |
+        wget -q -O "resp64m" https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/mobile.v2.fenix.release.latest.armeabi-v7a/artifacts/public%2Fbuild%2Farmeabi-v7a%2Ftarget.apk
+        wget -q https://github.com/iBotPeaches/Apktool/releases/download/v2.5.0/apktool_2.5.0.jar
+        
+        
+        java -jar apktool_2.5.0.jar d resp64m -o v8a
+        
+        sed -i 's/browser.safebrowsing.malware.enabled/unknown/;s/browser.safebrowsing.phishing.enabled/unknown/' v8a/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
+        sed -i 's/android\/downloads/firefox\/downloads/' v8a/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
+        sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v8a/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
+        sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v8a/smali/mozilla/components/feature/addons/AddonManager.smali
+        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons.json"' v8a/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
+        sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' v8a/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
+        java -jar apktool_2.5.0.jar b v8a -o v8a.apk --use-aapt2
+        wget -q https://github.com/lindongbin/gt/raw/master/zipalign
+        wget -q -P ./lib64 https://github.com/lindongbin/gt/raw/master/libc%2B%2B.so
+        chmod +x zipalign
+        ./zipalign -p 4 v8a.apk v8a-align.apk
+        
+        wget -q https://github.com/lindongbin/gt/raw/master/apksigner.jar
+        wget -q https://github.com/lindongbin/gt/raw/master/apksigner.jks
+        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fx-m-7a.apk v8a-align.apk
+        mkdir arm64
+        mv fx-m-7a.apk ./arm64/
+    - name: Get current date
+      id: date
+      run: echo "::set-output name=date::$(date +%Y年%m月%d日%H时)"
+    - name: Upload fxn-v8 release
+      uses: svenstaro/upload-release-action@v2
+      with:           
+        repo_token: ${{ secrets.ACTION_TOKEN }}
+        file: ./arm64/fx-m-7a.apk
+        tag: ${{ steps.date.outputs.date }}           
+        body: "Nightly Mod"           
+        file_glob: true           
+        prerelease: false           
+        overwrite: true
+
