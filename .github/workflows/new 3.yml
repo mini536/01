@@ -25,6 +25,7 @@ jobs:
         java -jar apktool_2.5.0.jar d resp64m -o v8a
         
         sed -i "s/^.*versionCode.*$/  versionCode: '2147483647'/" v8a/apktool.yml
+        sed -i 's/android\/downloads/firefox\/downloads/' v8a/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
         sed -i 's/baidu/unknown/g' v8a/assets/extensions/webcompat/data/ua_overrides.js
         sed -i 's/browser.safebrowsing.malware.enabled/unknown/;s/browser.safebrowsing.phishing.enabled/unknown/' v8a/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
         sed -i '/public aboutConfigEnabled/{n;s/\.locals 1/\.locals 1\n      const\/4 p1, 0x1/}' v8a/smali_classes2/org/mozilla/geckoview/GeckoRuntimeSettings$Builder.smali
