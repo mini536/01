@@ -72,7 +72,7 @@ jobs:
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out x86.apk v7p-align.apk
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out x64.apk v8p-align.apk
     - name: Upload release
-      uses: svenstaro/upload-release-action@v2
+      uses: actions/upload-release-asset@v1
       with:           
         repo_token: ${{ secrets.ACTION_TOKEN }}
         file: ./arm.apk arm64.apk x86.apk x64.apk
