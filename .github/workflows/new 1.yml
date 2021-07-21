@@ -72,7 +72,7 @@ jobs:
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out x86.apk v7p-align.apk
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out x64.apk v8p-align.apk
         mkdir release
-        mv arm.apk arm64.apk,x86.apk x64.apk ./release/
+        mv arm.apk arm64.apk x86.apk x64.apk ./release/
     - name: Get current date
       id: date
       run: echo "::set-output name=date::$(date +%Y年%m月%d日%H时)"
