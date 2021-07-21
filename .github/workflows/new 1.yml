@@ -1,9 +1,10 @@
 name: auto-mod-fxn-all
-
+env:    
+  TZ: America/Sanfransisco  
 on:
   workflow_dispatch:
   schedule:
-    - cron: "18 16,4  *  *  *"
+    - cron: "18 5,17  *  *  *"
 
 jobs:
   build:
@@ -79,30 +80,17 @@ jobs:
         mv fxn-m-8a.apk ./arm64/
         mv fxn-m-7p.apk ./x86/
         mv fxn-m-8p.apk ./x64/
-    - name: Upload nightly release
+    - name: Get current date
+      id: date
+      run: echo "::set-output name=date::$(date +%Y年%m月%d日%H时)"
+    - name: Upload fxn-v8 release
       uses: svenstaro/upload-release-action@v2
       with:           
         repo_token: ${{ secrets.ACTION_TOKEN }}
-        file: ./arm64/fxn-m-8a.apk
-        tag: ${{ github.ref }}           
-        body: "Nightly build"           
+        file: ./arm64/fxn-m-8a.apk ./arm/fxn-m-7a.apk ./x86/fxn-m-7p.apk ./x64/fxn-mv-8p.apk
+        tag: ${{ steps.date.outputs.date }}           
+        body: "Nightly Mod"           
         file_glob: true           
         prerelease: true           
         overwrite: true
-    - uses: actions/upload-artifact@v2
-      with:
-          name: fxn-m-v7a
-          path: ./arm/
-    - uses: actions/upload-artifact@v2
-      with:
-          name: fxn-m-v8a
-          path: ./arm64/
-    - uses: actions/upload-artifact@v2
-      with:
-          name: fxn-m-x86
-          path: ./x86/
-    - uses: actions/upload-artifact@v2
-      with:
-          name: fxn-m-x64
-          path: ./x64/
 
