@@ -80,7 +80,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:           
         repo_token: ${{ secrets.ACTION_TOKEN }}
-        file: ./release/
+        file: ./release/arm.apk arm64.apk x86.apk x64.apk
         tag: ${{ steps.date.outputs.date }}           
         body: "Nightly Mod"           
         file_glob: true           
