@@ -1,10 +1,9 @@
 name: auto-mod-fxn-all
-env:    
-  TZ: America/Sanfransisco  
+
 on:
   workflow_dispatch:
   schedule:
-    - cron: "18 5,17  *  *  *"
+    - cron: "18 16,4  *  *  *"
 
 jobs:
   build:
@@ -34,62 +33,89 @@ jobs:
         sed -i 's/android\/downloads/firefox\/downloads/' v8a/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
         sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v8a/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
         sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v8a/smali/mozilla/components/feature/addons/AddonManager.smali
-        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/Rosabis\/01@addons\/addons.json"' v8a/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
+        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons.json"' v8a/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
         sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' v8a/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
         sed -i 's/browser.safebrowsing.malware.enabled/unknown/;s/browser.safebrowsing.phishing.enabled/unknown/' v7a/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
         sed -i 's/android\/downloads/firefox\/downloads/' v7a/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
         sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v7a/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
         sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v7a/smali/mozilla/components/feature/addons/AddonManager.smali
-        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/Rosabis\/01@addons\/addons.json"' v7a/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
+        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons.json"' v7a/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
         sed -i 's/browser.safebrowsing.malware.enabled/unknown/;s/browser.safebrowsing.phishing.enabled/unknown/' v8p/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
         sed -i 's/android\/downloads/firefox\/downloads/' v8p/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
         sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v8p/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
         sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v8p/smali/mozilla/components/feature/addons/AddonManager.smali
-        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/Rosabis\/01@addons\/addons.json"' v8p/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
+        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons.json"' v8p/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
         sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' v8p/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
         sed -i 's/browser.safebrowsing.malware.enabled/unknown/;s/browser.safebrowsing.phishing.enabled/unknown/' v7p/smali_classes2/org/mozilla/geckoview/ContentBlocking\$Settings.smali
         sed -i 's/android\/downloads/firefox\/downloads/' v7p/smali_classes2/org/mozilla/fenix/AppRequestInterceptor.smali
         sed -i 's/if-eqz p1, :cond_c/goto :cond_c/' v7p/smali/mozilla/components/feature/addons/ui/AddonsManagerAdapter.smali
         sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' v8a/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
         sed -i 's/"geckoViewAddons"/"unknown"/;s/"nativeMessaging"/"unknown"/' v7p/smali/mozilla/components/feature/addons/AddonManager.smali
-        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/Rosabis\/01@addons\/addons.json"' v7p/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
+        sed -i '/.line 9/i\ const-string v5, "https:\/\/cdn.jsdelivr.net\/gh\/lindongbin\/gt@addons\/addons.json"' v7p/smali/mozilla/components/feature/addons/amo/AddonCollectionProvider.smali
         sed -i 's/"content"/"unknown"/;s/"file"/"unknown"/;s/"resource"/"unknown"/' v7p/smali/mozilla/components/browser/engine/gecko/GeckoEngineSession.smali
         java -jar apktool_2.5.0.jar b v7a -o v7a.apk --use-aapt2
         java -jar apktool_2.5.0.jar b v8a -o v8a.apk --use-aapt2
         java -jar apktool_2.5.0.jar b v7p -o v7p.apk --use-aapt2
         java -jar apktool_2.5.0.jar b v8p -o v8p.apk --use-aapt2
-        wget -q https://github.com/Rosabis/01/raw/master/zipalign
-        wget -q -P ./lib64 https://github.com/Rosabis/01/raw/master/libc%2B%2B.so
+        wget -q https://github.com/lindongbin/gt/raw/master/zipalign
+        wget -q -P ./lib64 https://github.com/lindongbin/gt/raw/master/libc%2B%2B.so
         chmod +x zipalign
         ./zipalign -p 4 v7a.apk v7a-align.apk
         ./zipalign -p 4 v8a.apk v8a-align.apk
         ./zipalign -p 4 v7p.apk v7p-align.apk
         ./zipalign -p 4 v8p.apk v8p-align.apk
         
-        wget -q https://github.com/Rosabis/01/raw/master/apksigner.jar
-        wget -q https://github.com/Rosabis/01/raw/master/apksigner.jks
-        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out av7.apk v7a-align.apk
-        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out av8.apk v8a-align.apk
+        wget -q https://github.com/lindongbin/gt/raw/master/apksigner.jar
+        wget -q https://github.com/lindongbin/gt/raw/master/apksigner.jks
+        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out arm.apk v7a-align.apk
+        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out arm64.apk v8a-align.apk
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out x86.apk v7p-align.apk
         java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out x64.apk v8p-align.apk
         mkdir arm
         mkdir arm64
         mkdir x86
         mkdir x64
-        mv av7.apk ./arm/
-        mv av8.apk ./arm64/
+        mv arm.apk ./arm/
+        mv arm64.apk ./arm64/
         mv x86.apk ./x86/
         mv x64.apk ./x64/
-    - name: Get current date
-      id: date
-      run: echo "::set-output name=date::$(date +%Y年%m月%d日%H时)"
-    - name: Upload av7 release
+    - name: Upload Armv7 release
       uses: svenstaro/upload-release-action@v2
       with:           
         repo_token: ${{ secrets.ACTION_TOKEN }}
-        file: ./arm/av7.apk
-        tag: ${{ steps.date.outputs.date }}           
-        body: "Nightly Mod"           
+        file: ./arm/arm.apk
+        tag: ${{ github.ref }}           
+        body: "Nightly build"           
+        file_glob: true           
+        prerelease: true           
+        overwrite: true
+    - name: Upload Armv8 release
+      uses: svenstaro/upload-release-action@v2
+      with:           
+        repo_token: ${{ secrets.ACTION_TOKEN }}
+        file: ./arm64/arm64.apk
+        tag: ${{ github.ref }}           
+        body: "Nightly build"           
+        file_glob: true           
+        prerelease: true           
+        overwrite: true
+    - name: Upload X86 release
+      uses: svenstaro/upload-release-action@v2
+      with:           
+        repo_token: ${{ secrets.ACTION_TOKEN }}
+        file: ./x86/x86.apk
+        tag: ${{ github.ref }}           
+        body: "Nightly build"           
+        file_glob: true           
+        prerelease: true           
+        overwrite: true
+    - name: Upload X64 release
+      uses: svenstaro/upload-release-action@v2
+      with:           
+        repo_token: ${{ secrets.ACTION_TOKEN }}
+        file: ./x64/x64.apk
+        tag: ${{ github.ref }}           
+        body: "Nightly build"           
         file_glob: true           
         prerelease: true           
         overwrite: true
