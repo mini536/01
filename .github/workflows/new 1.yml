@@ -68,26 +68,26 @@ jobs:
         
         wget -q https://github.com/Rosabis/01/raw/master/apksigner.jar
         wget -q https://github.com/Rosabis/01/raw/master/apksigner.jks
-        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxn-m-7a.apk v7a-align.apk
-        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxn-m-8a.apk v8a-align.apk
-        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxn-m-7p.apk v7p-align.apk
-        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out fxn-m-8p.apk v8p-align.apk
+        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out av7.apk v7a-align.apk
+        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out av8.apk v8a-align.apk
+        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out x86.apk v7p-align.apk
+        java -jar apksigner.jar sign --ks apksigner.jks --ks-pass pass:testkey --out x64.apk v8p-align.apk
         mkdir arm
         mkdir arm64
         mkdir x86
         mkdir x64
-        mv fxn-m-7a.apk ./arm/
-        mv fxn-m-8a.apk ./arm64/
-        mv fxn-m-7p.apk ./x86/
-        mv fxn-m-8p.apk ./x64/
+        mv av7.apk ./arm/
+        mv av8.apk ./arm64/
+        mv x86.apk ./x86/
+        mv x64.apk ./x64/
     - name: Get current date
       id: date
       run: echo "::set-output name=date::$(date +%Y年%m月%d日%H时)"
-    - name: Upload fxn-v8 release
+    - name: Upload av7 release
       uses: svenstaro/upload-release-action@v2
       with:           
         repo_token: ${{ secrets.ACTION_TOKEN }}
-        file: ./arm64/fxn-m-8a.apk ./arm/fxn-m-7a.apk ./x86/fxn-m-7p.apk ./x64/fxn-mv-8p.apk
+        file: ./arm/av7.apk
         tag: ${{ steps.date.outputs.date }}           
         body: "Nightly Mod"           
         file_glob: true           
